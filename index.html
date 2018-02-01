@@ -11,20 +11,17 @@
 <body>
 
   <div class="container">
-    <h1>GIF Search</h1>
 
-    <!-- Rendered buttons will get dumped here  -->
+    <h1>GIF Search</h1>
+    
     <div id="buttons-view"></div>
 
     <form id="user-form">
       <label for="user-input">Add a button</label>
       <input type="text" id="user-input"><br>
-
-      <!-- Button triggers new category to be added -->
       <input id="add-category" type="submit" value="Add a Category">
     </form>
 
-    <!-- GIFs will get dumped Dere -->
     <div id="gifs-appear-here"></div>
 
   <style>
@@ -44,7 +41,6 @@
   <script type="text/javascript">
 
     var originalArray = ["Cats", "Dogs", "Birds", "Pigs"];
-
     function displayGif() {
       $("#gifs-appear-here").empty();
       var search = $(this).attr("data-search");
@@ -55,22 +51,14 @@
         url: queryURL,
         method: "GET"
       }).then(function(response) {
-
         console.log(response);
-
         var results = response.data;
 
         for (var i = 0; i < results.length; i++) {
           var animalDiv = $("<div class='animalImage'>")
-
           var p = $("<p>").text("Rating: " + results[i].rating)
-
           var animalImage = $("<img>")
-
-          // animalImage.addClass(animalImage)
-
           animalImage.attr("data-state", "still")
- 
           animalImage.attr("src", results[i].images.fixed_height_still.url);
 
           animalImage.attr("data-still", results[i].images.fixed_height_still.url);
@@ -78,69 +66,46 @@
           animalImage.attr("data-animate", results[i].images.fixed_height.url);
 
           animalDiv.append(p, animalImage)
-
-          // animalDiv.append(animalImage)
-
           $("#gifs-appear-here").prepend(animalDiv)
-
-          $("img").on("click", function() {
-            var state = $(this).attr("data-state")
-            console.log(state)
-            if(state == "still") {
-            //reset image source to animated verson
-              $(this).attr("src", $(this).attr("data-animate"));
-              $(this).attr("data-state", "animate");
-              //change to animate
-              // $("img").attr("src", "data-animate");
-            } else {
-              $(this).attr("src", $(this).attr("data-still"));
-              $(this).attr("data-state", "still");
-              //it's already animated
-              //reset image src to still version
-              //change state to still
-            }
-          })
-
         }
+
+        $("img").on("click", function() {
+          var state = $(this).attr("data-state")
+          console.log(state)
+          if(state == "still") {
+            $(this).attr("src", $(this).attr("data-animate"));
+            $(this).attr("data-state", "animate");
+
+          } else {
+            $(this).attr("src", $(this).attr("data-still"));
+            $(this).attr("data-state", "still");
+          }
+        })
 
       });
     };
 
     function renderButtons() {
-
       $("#buttons-view").empty();
 
       for (var i = 0; i < originalArray.length; i++) {
-
         var a = $("<button>");
-        // Adds a class of category to our button
         a.addClass("buttonSearch");
-        // Added a data-attribute
         a.attr("data-search", originalArray[i]);
-        // Provided the initial button text
         a.text(originalArray[i]);
-        // Added the button to the buttons-view div
         $("#buttons-view").append(a);
       }
     }
 
     $("#add-category").on("click", function(event) {
       event.preventDefault();
-
-      // This line of code will grab the input from the textbox
       var newSearch = $("#user-input").val().trim();
-
-      // The movie from the textbox is then added to our array
       originalArray.push(newSearch);
-
       $("#user-input").text("")
-
-      // Calling renderButtons which handles the processing of our movie array
       renderButtons();
     });
 
     $("#buttons-view").on("click", ".buttonSearch", displayGif);
-
     renderButtons();
 
   </script>
