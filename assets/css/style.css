@@ -1,0 +1,38 @@
+body {
+  background-color: lightgray;
+}
+
+#gifs-appear-here {
+  width: 66%;
+}
+
+.animalImage {
+  float: left;
+  margin: 10px;
+}
+
+#searchBar {
+  float: right;
+  width: 30%;
+}
+
+#user-input {
+  width: 75%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+button, #add-category {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 10px;
+  background-color: lightblue;
+}
+
+button:hover { 
+background-color: teal;
+}
+
+#add-category:hover { 
+background-color: teal;
+}
