@@ -16,22 +16,55 @@
     
     <div id="buttons-view"></div>
 
-    <form id="user-form">
-      <label for="user-input">Add a button</label>
-      <input type="text" id="user-input"><br>
-      <input id="add-category" type="submit" value="Add a Category">
-    </form>
+    <div id="searchBar">
+      <form id="user-form">
+        <label for="user-input"><strong>Add a button</strong></label><br>
+        <input type="text" id="user-input"><br>
+        <input id="add-category" type="submit" value="Add a Category">
+      </form>
+    </div>
 
     <div id="gifs-appear-here"></div>
 
   <style>
 
+    body {
+      background-color: lightgray;
+    }
+
+    #gifs-appear-here {
+      width: 66%;
+    }
+
     .animalImage {
       float: left;
-      margin: 40px;
-      clear: top;
-      clear: bottom;
+      margin: 10px;
+    }
 
+    #searchBar {
+      float: right;
+      width: 30%;
+    }
+
+    #user-input {
+      width: 75%;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+
+    button, #add-category {
+      margin-top: 5px;
+      margin-bottom: 5px;
+      margin-right: 10px;
+      background-color: lightblue;
+    }
+
+    button:hover { 
+    background-color: teal;
+    }
+
+    #add-category:hover { 
+    background-color: teal;
     }
 
   </style>
@@ -45,7 +78,7 @@
       $("#gifs-appear-here").empty();
       var search = $(this).attr("data-search");
       var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-        search + "&api_key=dc6zaTOxFJmzC&limit=10";
+        search + "&api_key=JqMceBQGL7UXgLrqfs3c2wDnZXKdkZYW&limit=10";
 
       $.ajax({
         url: queryURL,
